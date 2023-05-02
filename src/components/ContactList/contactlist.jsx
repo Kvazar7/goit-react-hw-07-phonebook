@@ -25,7 +25,7 @@ const ContactList = () => {
               <ContactListItem
                 key={contact.id}
                 name={contact.name}
-                number={contact.phone}
+                phone={contact.phone}
                 id={contact.id}
               />
             );
@@ -43,7 +43,7 @@ ContactList.propTypes = {
     PropTypes.exact({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
       onClick: PropTypes.func,
     })
   ),

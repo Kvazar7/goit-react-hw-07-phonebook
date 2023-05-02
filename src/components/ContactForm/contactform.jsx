@@ -8,8 +8,10 @@ import css from '../ContactForm/contactform.module.css'
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(''); 
+  
   const dispatch = useDispatch()
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
+  
   const handleChange = e => {
     const { name, value } = e.target;
     switch (name) {
@@ -30,7 +32,7 @@ const ContactForm = () => {
     e.preventDefault();
 
     const isMatch = contacts.find(
-      el => el.name.toLowerCase() === name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     if (isMatch) {
       Notiflix.Notify.warning(`${name} is already in contacts list!`);
