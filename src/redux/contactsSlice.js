@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getContacts, addContact, deleteContact } from 'services/services';
 
 const handlePending = state => {
