@@ -1,26 +1,23 @@
-// import PropTypes from 'prop-types';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'services/services';
-import { useState } from 'react';
 import css from '../ContactForm/contactform.module.css'
 
 const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState(''); 
   
   const dispatch = useDispatch()
   const contacts = useSelector(state => state.contacts.items);
+  let name = useSelector(state => state.contacts.name);
+  let number = useSelector(state => state.contacts.number);
   
   const handleChange = e => {
-    const { name, value } = e.target;
     switch (name) {
       case 'name': {
-        setName(value);
+        name = e.target.value;
         break;
       }
       case 'number': {
-        setNumber(value);
+        number = e.target.value;
         break;
       }
       default:
@@ -32,16 +29,16 @@ const ContactForm = () => {
     e.preventDefault();
 
     const isMatch = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
+      contact => contact.name.toLowerCase() === e.target.elements.name.value.toLowerCase()
     );
     if (isMatch) {
       Notiflix.Notify.warning(`${name} is already in contacts list!`);
       return;
     }
 
-    dispatch(addContact(name, number))
-    setName('');
-    setNumber('');
+    const form = e.target;
+    dispatch(addContact({ name: form.elements.name.value, phone: form.elements.number.value }));
+    form.reset();
   };
 
   return (

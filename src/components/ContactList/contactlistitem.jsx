@@ -5,10 +5,11 @@ import css from '../ContactList/contactlistitem.module.css'
 
 const ContactListItem = ({ name, phone, id }) => {
   const dispatch = useDispatch();
-  const onClick = () => dispatch(deleteContact(id))
+  const delContact = () => dispatch(deleteContact(id));
+
   return (
     <li className={css.contactlistitem}>
-      {name}: {phone} <button type="button" onClick={onClick} className={css.contactlistitem_button}>Delete</button>
+      {name}: {phone} <button type="button" onClick={delContact} className={css.contactlistitem_button}>Delete</button>
     </li>
   );
 };
